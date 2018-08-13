@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Producto } from '../interfaces/producto.interface';
-import { resolve } from 'dns';
+import { resolve } from '../../../node_modules/@types/q';
 
 @Injectable({
   providedIn: 'root'
@@ -32,26 +32,28 @@ export class ProductosService {
     return this.http.get(`https://acheestudio-d4d45.firebaseio.com/productos/${ id }.json`);
   }
 
-  buscarProducto(termino: string) {
+  buscarProducto( termino: string ) {
+
 
     if ( this.productos.length === 0 ) {
       // cargar productos
       this.cargarProductos().then( () => {
-        // ejecutar despues de tener los productos
-        // aplicar filtro
-        this.filtrarProductos(termino);
+        // ejecutar después de tener los productos
+        // Aplicar filtro
+        this.filtrarProductos( termino );
       });
 
     } else {
       // aplicar el filtro
+      this.filtrarProductos( termino );
     }
 
-    this.productosFiltrado = this.productos.filter( producto => {
-      return true;
-    });
 
   }
+
   private filtrarProductos( termino: string ) {
+
+    // console.log(this.productos);
     this.productosFiltrado = [];
 
     termino = termino.toLocaleLowerCase();
@@ -59,9 +61,14 @@ export class ProductosService {
     this.productos.forEach( prod => {
 
       const tituloLower = prod.titulo.toLocaleLowerCase();
+
       if ( prod.categoria.indexOf( termino ) >= 0 || tituloLower.indexOf( termino ) >= 0  ) {
-        this.productosFiltrado.push(prod);
+        this.productosFiltrado.push( prod );
       }
+
     });
+
+
   }
+
 }
