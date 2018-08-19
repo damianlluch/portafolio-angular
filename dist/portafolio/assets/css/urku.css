@@ -1259,11 +1259,12 @@ body {
 
 .rk-portfolio-cover {
   background-position: center center;
-  background-size: coverz;
+  background-size: contain, cover;
+  background-repeat: no-repeat; /* Do not repeat the image */
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display:         flex;
+  display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -1274,7 +1275,7 @@ body {
           align-items: flex-end;
   height: 100vh;
   padding-bottom: 1.5rem;
-  width: 100%;
+  width: 70%;
 }
 @media (min-width: 40em) {
   .rk-portfolio-cover {
